@@ -1,13 +1,16 @@
-
+import { Routes, Route } from "react-router-dom";
+import Home from "./pages/Home";
+import ProductDetail from "./pages/ProductDetail";
+import Cart from "./pages/Cart";
 
 function App() {
   return (
-    <div className="flex justify-center items-center h-screen bg-gray-900">
-      <h1 className="text-4xl font-bold text-blue-400 underline">
-        Tailwind v4 Rodando! 🚀
-      </h1>
-    </div>
-  )
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/product/:id" element={<ProductDetail />} />
+      <Route path="/cart" element={<Cart />} />
+    </Routes>
+  );
 }
 
-export default App
+export default App;
