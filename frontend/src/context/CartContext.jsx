@@ -1,10 +1,17 @@
 /* eslint-disable react-refresh/only-export-components */
-import { createContext, useState, useContext } from 'react';
+import { createContext, useState, useContext, useEffect } from 'react';
 
 const CartContext = createContext();
 
 export function CartProvider({ children }) {
-  const [cart, setCart] = useState([]);
+  const [cart, setCart] = useState(() => {
+    const savedCart = localStorage.getItem("cart");
+    return savedCart ? JSON.parse(savedCart) : [];
+  });
+
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(cart));
+  }, [cart]);
 
   const addToCart = (product) => {
     setCart((prevCart) => {
@@ -19,21 +26,27 @@ export function CartProvider({ children }) {
     });
   };
 
+  const removeFromCart = (productId) => {
+    setCart((prevCart) => prevCart.filter(item => item.id !== productId));
+  }
+
+  const updateQuantity = (productId, amount) => {
+    setCart((prevCart) => prevCart.map(item => {
+      if (item.id === productId) {
+        const newQty = item.quantity + amount;
+        return {...item, quantity: newQty >  0 ? newQty : 1};
+      }
+      return item;
+    }));
+  };
+
   const cartCount = cart.reduce((total, item) => total + item.quantity, 0);
 
   return (
-    <CartContext.Provider value={{ cart, addToCart, cartCount }}>
+    <CartContext.Provider value={{ cart, addToCart, cartCount, removeFromCart, updateQuantity }}>
       {children}
     </CartContext.Provider>
   );
 }
 
-const useCart = () => {
-  const context = useContext(CartContext);
-  if (!context) {
-    throw new Error("useCart deve ser usado dentro de um CartProvider");
-  }
-  return context;
-};
-
-export {useCart};
+export const useCart = () => useContext(CartContext);
