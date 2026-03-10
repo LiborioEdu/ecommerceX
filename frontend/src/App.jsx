@@ -4,6 +4,8 @@ import ProductDetail from "./pages/ProductDetail";
 import Cart from "./pages/Cart";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import Profile from "./pages/Profile"
+import PrivateRoute from "./components/PrivateRoute"
 
 function App() {
   return (
@@ -13,6 +15,27 @@ function App() {
       <Route path="/cart" element={<Cart />} />
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
+
+      {/* Rota protegida: Só entra quem tem o token */}
+      <Route 
+        path="/profile"
+        element={
+          <PrivateRoute>
+            <Profile />
+          </PrivateRoute>
+        }
+      />
+
+      {/* Se tiver um checkout, proteja-o também */}
+      {/* <Route 
+        path="/checkout"
+        element={
+          <PrivateRoute>
+            <Checkout />
+          </PrivateRoute>
+        }
+      /> */}
+        
     </Routes>
   );
 }
