@@ -1,7 +1,7 @@
 from django.shortcuts import render
-from rest_framework import viewsets, generics
-from .models import Category, Product
-from .serializers import CategorySerializer, ProductSerializer, UserSerializer
+from rest_framework import viewsets, generics, permissions
+from .models import Category, Product, Order
+from .serializers import CategorySerializer, ProductSerializer, UserSerializer, OrderSerializer
 from django.contrib.auth.models import User
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.decorators import api_view, permission_classes
@@ -30,3 +30,14 @@ def me(request):
         "email": user.email,
     })
     
+class OrderViewSet(viewsets.ModelViewSet):
+    serializer_class = OrderSerializer
+    permission_classes = [permissions.IsAuthenticated] # Somente logados
+    
+    def get_queryset(self):
+        # Filtra para que o usuário veja APENAS os seus próprios pedidos
+        return Order.objects.filter(user=self.request.user).order_by('-created_at')
+
+    def perform_create(self, serializer):
+        # Associa automaticamente o pedido ao usuário que está logado
+        serializer.save(user=self.request.user)

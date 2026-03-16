@@ -6,6 +6,7 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Profile from "./pages/Profile"
 import PrivateRoute from "./components/PrivateRoute"
+import Checkout from "./pages/Checkout"; 
 
 function App() {
   return (
@@ -26,15 +27,14 @@ function App() {
         }
       />
 
-      {/* Se tiver um checkout, proteja-o também */}
-      {/* <Route 
-        path="/checkout"
+      <Route 
+        path="/checkout" 
         element={
           <PrivateRoute>
             <Checkout />
           </PrivateRoute>
-        }
-      /> */}
+        } 
+      />
         
     </Routes>
   );
