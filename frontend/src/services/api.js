@@ -21,11 +21,26 @@ api.interceptors.request.use(
 // INTERCEPTOR DE RESPOSTA: Lidar com tokens expirados
 api.interceptors.response.use(
     (response) => response,
-    (error) => {
-        if (error.response && error.response.status === 401) {
-            console.warn("Token expirado ou inválido. Redirecionando...")
-            localStorage.removeItem("access");
-            window.location.href = "/login";
+    async (error) => {
+        const originalRequest = error.config;
+        if (error.response && error.response.status === 401 && !originalRequest._retry) {
+            originalRequest._retry = true;
+            try {
+                const refresh = localStorage.getItem("refresh");
+                if (refresh) {
+                    const res = await axios.post(`${api.defaults.baseURL}token/refresh/`, { refresh });
+                    if (res.data.access) {
+                        localStorage.setItem("access", res.data.access);
+                        originalRequest.headers.Authorization = `Bearer ${res.data.access}`;
+                        return api(originalRequest);
+                    }
+                }
+            } catch {
+                console.warn("Refresh token expirado. Redirecionando...");
+                localStorage.removeItem("access");
+                localStorage.removeItem("refresh");
+                window.location.href = "/login";
+            }
         }
         return Promise.reject(error);
     }

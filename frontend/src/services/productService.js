@@ -9,3 +9,13 @@ export const getProducts = async () => {
         throw error;
     }
 };
+
+export const getProduct = async (id) => {
+    try {
+        const response = await api.get(`products/${id}/`);
+        return response.data;
+    } catch (error) {
+        console.error(`Erro ao buscar produto ${id}: `, error);
+        throw error;
+    }
+};

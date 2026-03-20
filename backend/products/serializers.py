@@ -35,6 +35,7 @@ class OrderItemSerializer(serializers.ModelSerializer):
     class Meta:
         model = OrderItem
         fields = ['product', 'quantity', 'price']
+        read_only_fields = ['price']
 
 class OrderSerializer(serializers.ModelSerializer):
     items = OrderItemSerializer(many=True) # Aceita uma lista de itens
@@ -42,14 +43,32 @@ class OrderSerializer(serializers.ModelSerializer):
     class Meta:
         model = Order
         fields = ['id', 'created_at', 'total_price', 'status', 'items']
-        read_only_fields = ['user']
+        read_only_fields = ['user', 'total_price']
 
     def create(self, validated_data):
-        items_data = validated_data.pop('items') # Separa os itens do pedido
+        items_data = validated_data.pop('items')
+        
+        # O backend não deve confiar no total_price. Começa com 0.
+        validated_data['total_price'] = 0
         order = Order.objects.create(**validated_data) # Cria o pedido principal
         
-        # Cria cada item vinculado a esse pedido
+        calculated_total = 0
+        # Cria cada item vinculado a esse pedido, usando preços reais
         for item_data in items_data:
-            OrderItem.objects.create(order=order, **item_data)
+            product = item_data['product']
+            quantity = item_data['quantity']
+            current_price = product.price # Valor real extraído do DB
+            
+            OrderItem.objects.create(
+                order=order, 
+                product=product,
+                quantity=quantity,
+                price=current_price
+            )
+            calculated_total += current_price * quantity
+            
+        # Atualiza a order de forma autoritária e final
+        order.total_price = calculated_total
+        order.save()
         
         return order

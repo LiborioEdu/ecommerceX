@@ -3,17 +3,19 @@ from rest_framework import viewsets, generics, permissions
 from .models import Category, Product, Order
 from .serializers import CategorySerializer, ProductSerializer, UserSerializer, OrderSerializer
 from django.contrib.auth.models import User
-from rest_framework.permissions import AllowAny, IsAuthenticated
+from rest_framework.permissions import AllowAny, IsAuthenticated, IsAuthenticatedOrReadOnly
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 
 class CategoryViewSet(viewsets.ModelViewSet):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
+    permission_classes = [IsAuthenticatedOrReadOnly]
     
 class ProductViewSet(viewsets.ModelViewSet):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
+    permission_classes = [IsAuthenticatedOrReadOnly]
 
 class RegisterView(generics.CreateAPIView):
     queryset = User.objects.all()
