@@ -11,21 +11,21 @@ export default function Cart() {
     <div className="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen">
       <Navbar />
       
-      <main className="max-w-7xl mx-auto px-4 py-8 lg:py-12">
+      <main className="max-w-7xl mx-auto px-4 py-8 lg:py-12 mt-16">
         <div className="flex flex-col lg:flex-row gap-8">
           
           {/* Left Column: Items & Shipping */}
           <div className="flex-1 space-y-8">
             <div>
-              <h1 className="text-3xl font-bold mb-2">Loot Crate Summary</h1>
-              <p className="text-slate-500 dark:text-slate-400">Review your legendary acquisitions before finalizing the ritual.</p>
+              <h1 className="text-3xl font-bold mb-2">Resumo do Tesouro</h1>
+              <p className="text-slate-500 dark:text-slate-400">Vasculhe suas aquisições lendárias antes de finalizar o ritual comercial.</p>
             </div>
             
             {/* Items List */}
             {cart.length === 0 ? (
               <div className="bg-white dark:bg-card-dark rounded-xl p-8 text-center border border-slate-200 dark:border-slate-800">
-                  <p className="text-slate-500 dark:text-slate-400 mb-4">O relicário se encontra vazio no momento.</p>
-                  <Link to="/" className="text-primary font-bold hover:underline">Retornar à Forja</Link>
+                  <p className="text-slate-500 dark:text-slate-400 mb-4">O seu relicário interior se encontra vazio no momento.</p>
+                  <Link to="/arsenal" className="text-primary font-bold hover:underline">Retornar à Forja Central</Link>
               </div>
             ) : (
                 <div className="space-y-4">
@@ -44,10 +44,10 @@ export default function Cart() {
                           <div>
                             <h3 className="font-bold text-lg">{item.name}</h3>
                             <p className="text-sm text-accent-blue flex items-center gap-1">
-                              {item.category_name || "Mythic Item"}
+                              {item.category_name || "Item Mítico"}
                             </p>
                           </div>
-                          <p className="font-bold text-primary">{item.price} GP</p>
+                          <p className="font-bold text-primary">{Number(item.price).toFixed(0)} PO</p>
                         </div>
                         <div className="flex items-center justify-between mt-4">
                           <div className="flex items-center bg-slate-100 dark:bg-background-dark rounded-lg px-2 border border-slate-300 dark:border-slate-700">
@@ -70,32 +70,32 @@ export default function Cart() {
                 <div className="bg-white dark:bg-card-dark rounded-xl p-6 border border-slate-200 dark:border-slate-800">
                   <div className="flex items-center gap-2 mb-6">
                     <span className="material-symbols-outlined text-primary">map</span>
-                    <h2 className="text-xl font-bold">Delivery to Kingdom</h2>
+                    <h2 className="text-xl font-bold">Entrega para o Reino</h2>
                   </div>
                   <form className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div className="space-y-1">
-                      <label className="text-xs uppercase tracking-wider font-bold text-slate-500">Lord/Lady Name</label>
-                      <input className="w-full bg-slate-50 dark:bg-background-dark border-slate-200 dark:border-slate-700 rounded-lg focus:ring-primary focus:border-primary" placeholder="Sir Alistair of Oakhaven" type="text" />
+                      <label className="text-xs uppercase tracking-wider font-bold text-slate-500">Nome do Lorde/Lady</label>
+                      <input className="w-full bg-slate-50 dark:bg-background-dark border-slate-200 dark:border-slate-700 rounded-lg focus:ring-primary focus:border-primary" placeholder="Sir Alistair de Oakhaven" type="text" />
                     </div>
                     <div className="space-y-1">
-                      <label className="text-xs uppercase tracking-wider font-bold text-slate-500">Kingdom / Realm</label>
-                      <input className="w-full bg-slate-50 dark:bg-background-dark border-slate-200 dark:border-slate-700 rounded-lg focus:ring-primary focus:border-primary" placeholder="The Iron Reach" type="text" />
+                      <label className="text-xs uppercase tracking-wider font-bold text-slate-500">Domínio / Reino</label>
+                      <input className="w-full bg-slate-50 dark:bg-background-dark border-slate-200 dark:border-slate-700 rounded-lg focus:ring-primary focus:border-primary" placeholder="As Terras de Ferro" type="text" />
                     </div>
                     <div className="md:col-span-2 space-y-1">
-                      <label className="text-xs uppercase tracking-wider font-bold text-slate-500">Fortress Address</label>
-                      <input className="w-full bg-slate-50 dark:bg-background-dark border-slate-200 dark:border-slate-700 rounded-lg focus:ring-primary focus:border-primary" placeholder="Throne Room, 3rd Citadel Floor" type="text" />
+                      <label className="text-xs uppercase tracking-wider font-bold text-slate-500">Endereço da Fortaleza</label>
+                      <input className="w-full bg-slate-50 dark:bg-background-dark border-slate-200 dark:border-slate-700 rounded-lg focus:ring-primary focus:border-primary" placeholder="Sala do Trono, 3º Andar da Cidadela" type="text" />
                     </div>
                     <div className="space-y-1">
-                      <label className="text-xs uppercase tracking-wider font-bold text-slate-500">Carrier Crow</label>
+                      <label className="text-xs uppercase tracking-wider font-bold text-slate-500">Corvo Mensageiro (Transporte)</label>
                       <select className="w-full bg-slate-50 dark:bg-background-dark border-slate-200 dark:border-slate-700 rounded-lg focus:ring-primary focus:border-primary">
-                        <option>Standard Raven (5-7 Cycles)</option>
-                        <option>Royal Gryphon (Next Day Dawn)</option>
-                        <option>Teleportation Circle (Instant)</option>
+                        <option>Corvo Comum (5-7 Ciclos Lunares)</option>
+                        <option>Grifo Real (Na Manhã Seguinte)</option>
+                        <option>Círculo de Teletransporte (Imediato)</option>
                       </select>
                     </div>
                     <div className="space-y-1">
-                      <label className="text-xs uppercase tracking-wider font-bold text-slate-500">Scroll of Note</label>
-                      <input className="w-full bg-slate-50 dark:bg-background-dark border-slate-200 dark:border-slate-700 rounded-lg focus:ring-primary focus:border-primary" placeholder="Optional delivery instructions" type="text" />
+                      <label className="text-xs uppercase tracking-wider font-bold text-slate-500">Pergaminho de Instruções</label>
+                      <input className="w-full bg-slate-50 dark:bg-background-dark border-slate-200 dark:border-slate-700 rounded-lg focus:ring-primary focus:border-primary" placeholder="Ordens adicionais de entrega" type="text" />
                     </div>
                   </form>
                 </div>
@@ -116,20 +116,20 @@ export default function Cart() {
                     }
                 `}</style>
                 <div className="glass-card rounded-2xl p-6 sticky top-24 space-y-6 mystic-glow">
-                  <h2 className="text-2xl font-bold border-b border-primary/10 pb-4">Treasure Audit</h2>
+                  <h2 className="text-2xl font-bold border-b border-primary/10 pb-4">Auditoria do Tesouro</h2>
                   <div className="space-y-3">
                     <div className="flex justify-between text-slate-400">
-                      <span>Base Loot Value</span>
-                      <span>{total.toFixed(2)} GP</span>
+                      <span>Valor Base do Saque</span>
+                      <span>{total.toFixed(2)} PO</span>
                     </div>
                     <div className="flex justify-between text-slate-400">
-                      <span>Caravan Insurance</span>
-                      <span>0.00 GP</span>
+                      <span>Seguro da Caravana</span>
+                      <span>0.00 PO</span>
                     </div>
                     <div className="pt-4 border-t border-primary/10 flex justify-between items-end">
                       <div>
-                        <p className="text-xs uppercase tracking-wider text-slate-500">Total Contribution</p>
-                        <p className="text-3xl font-black text-white">{total.toFixed(2)} <span className="text-primary text-lg">GP</span></p>
+                        <p className="text-xs uppercase tracking-wider text-slate-500">Contribuição Total</p>
+                        <p className="text-3xl font-black text-white">{total.toFixed(2)} <span className="text-primary text-lg">PO</span></p>
                       </div>
                     </div>
                   </div>
@@ -138,15 +138,15 @@ export default function Cart() {
                     <div className="flex items-start gap-3">
                       <span className="material-symbols-outlined text-primary mt-1">shield</span>
                       <div className="text-sm">
-                        <p className="font-bold text-primary">Dragon-Slayer's Warranty</p>
-                        <p className="text-slate-300">Covers damage from fire breath and magic disruption for 30 moon cycles.</p>
+                        <p className="font-bold text-primary">Garantia do Matador de Dragões</p>
+                        <p className="text-slate-300">Cobre danos causados por sopro de fogo mágico por exatos 30 ciclos lunares.</p>
                       </div>
                     </div>
                   </div>
                   
                   <button className="w-full bg-primary hover:bg-primary/90 text-background-dark font-bold py-4 rounded-xl flex items-center justify-center gap-2 transition-all transform hover:scale-[1.02] active:scale-95 shadow-lg shadow-primary/20">
                     <span className="material-symbols-outlined">payments</span>
-                    Finalize Exchange
+                    Finalizar o Intercâmbio
                   </button>
                   
                   <div className="flex justify-center gap-4 grayscale opacity-50">
@@ -155,7 +155,7 @@ export default function Cart() {
                     <span className="material-symbols-outlined text-3xl">currency_exchange</span>
                   </div>
                   <p className="text-center text-[10px] text-slate-500 uppercase tracking-[0.2em]">
-                    Merchant authorized by the High Council
+                    Mercador certificado pelo Alto Conselho da Ordem
                   </p>
                 </div>
               </div>
@@ -167,12 +167,12 @@ export default function Cart() {
             <div className="flex flex-col md:flex-row justify-between items-center gap-6">
                 <div className="flex items-center gap-2">
                     <span className="material-symbols-outlined text-primary">castle</span>
-                    <span className="text-sm font-bold opacity-75 italic text-slate-500">Propelling adventurers since the Third Era</span>
+                    <span className="text-sm font-bold opacity-75 italic text-slate-500">Impulsionando aventureiros desde a Terceira Era</span>
                 </div>
                 <div className="flex gap-8 text-xs font-bold uppercase tracking-widest text-slate-500">
-                    <a className="hover:text-primary transition-colors" href="#">Tavern Rules</a>
-                    <a className="hover:text-primary transition-colors" href="#">Map of Origin</a>
-                    <a className="hover:text-primary transition-colors" href="#">Scroll of Privacy</a>
+                    <a className="hover:text-primary transition-colors" href="#">Regras da Taverna</a>
+                    <a className="hover:text-primary transition-colors" href="#">Mapa de Origem</a>
+                    <a className="hover:text-primary transition-colors" href="#">Pergaminho de Privacidade</a>
                 </div>
             </div>
         </footer>

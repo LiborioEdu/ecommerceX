@@ -4,11 +4,10 @@ import { Link } from "react-router-dom";
 export default function ProductCard({ product }) {
   const { addToCart } = useCart();
 
-  // Helper function to render colors/labels based on fictional gear rarity
   const getRarity = (price) => {
-      if(price > 5000) return { label: "Mythic", color: "bg-primary text-background-dark" };
-      if(price > 1000) return { label: "Epic", color: "bg-secondary text-white" };
-      return { label: "Rare", color: "bg-slate-600 text-white" };
+      if(price > 5000) return { label: "Mítico", color: "bg-primary text-background-dark" };
+      if(price > 1000) return { label: "Épico", color: "bg-secondary text-white" };
+      return { label: "Raro", color: "bg-slate-600 text-white" };
   };
   const rarity = getRarity(product.price);
 
@@ -18,7 +17,7 @@ export default function ProductCard({ product }) {
         <img 
           className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" 
           alt={product.name} 
-          src={product.image || "https://placehold.co/400x500/1a1f26/f59e0b?text=Mythic+Item"} 
+          src={product.image || "https://placehold.co/400x500/1a1f26/f59e0b?text=Item+Mítico"} 
         />
         <div className={`absolute top-3 left-3 ${rarity.color} font-black px-2 py-1 rounded text-[10px] uppercase shadow-lg z-10`}>
           {rarity.label}
@@ -28,13 +27,13 @@ export default function ProductCard({ product }) {
           <Link to={`/product/${product.id}`}>
              <h4 className="text-lg font-bold mb-1 hover:text-primary transition-colors line-clamp-1">{product.name}</h4>
           </Link>
-          <p className="text-slate-500 text-sm mb-6 line-clamp-2 h-10">{product.description || "Forged in the depths of the unknown."}</p>
+          <p className="text-slate-500 text-sm mb-6 line-clamp-2 h-10">{product.description || "Forjada nas profundezas do desconhecido."}</p>
           <div className="flex justify-between items-center mt-auto">
-            <span className="text-xl font-black text-primary">{Number(product.price).toFixed(0)} <span className="text-sm">GP</span></span>
+            <span className="text-xl font-black text-primary">{Number(product.price).toFixed(0)} <span className="text-sm">PO</span></span>
             <button 
               onClick={() => addToCart(product)}
               className="bg-secondary/20 hover:bg-secondary text-secondary hover:text-white p-2 rounded-lg transition-colors group-hover:shadow-[0_0_10px_rgba(59,130,246,0.3)]"
-              title="Add to Vault"
+              title="Colocar no Baú"
             >
               <span className="material-symbols-outlined">add_shopping_cart</span>
             </button>

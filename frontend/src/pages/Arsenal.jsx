@@ -21,44 +21,44 @@ export default function Arsenal() {
         {/* Sidebar Filters */}
         <aside className="w-full md:w-64 shrink-0 space-y-8">
           <div>
-            <h3 className="text-xs font-bold uppercase tracking-widest text-slate-500 mb-4">Gear Category</h3>
+            <h3 className="text-xs font-bold uppercase tracking-widest text-slate-500 mb-4">Categoria de Equipamento</h3>
             <div className="space-y-1">
               <button className="w-full flex items-center gap-3 px-3 py-2 rounded-lg bg-primary/10 text-primary font-medium">
-                <span className="material-symbols-outlined">swords</span> All Equipment
+                <span className="material-symbols-outlined">swords</span> Todos os Equipamentos
               </button>
               <button className="w-full flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-slate-800 text-slate-400 hover:text-slate-100 transition-all">
-                <span className="material-symbols-outlined">shield</span> Shields & Plate
+                <span className="material-symbols-outlined">shield</span> Escudos & Armaduras pesadas
               </button>
               <button className="w-full flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-slate-800 text-slate-400 hover:text-slate-100 transition-all">
-                <span className="material-symbols-outlined">magic_button</span> Apparel
+                <span className="material-symbols-outlined">magic_button</span> Vestes Arcanas
               </button>
               <button className="w-full flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-slate-800 text-slate-400 hover:text-slate-100 transition-all">
-                <span className="material-symbols-outlined">science</span> Consumables
+                <span className="material-symbols-outlined">science</span> Elixires e Consumíveis
               </button>
             </div>
           </div>
 
           <div>
-            <h3 className="text-xs font-bold uppercase tracking-widest text-slate-500 mb-4">Item Rarity</h3>
+            <h3 className="text-xs font-bold uppercase tracking-widest text-slate-500 mb-4">Raridade do Item</h3>
             <div className="space-y-2">
               <label className="flex items-center gap-3 cursor-pointer group">
                 <input className="rounded border-slate-700 bg-slate-800 text-primary focus:ring-primary" type="checkbox"/>
-                <span className="text-sm text-slate-400 group-hover:text-slate-100 transition-colors">Rare Blueprints</span>
+                <span className="text-sm text-slate-400 group-hover:text-slate-100 transition-colors">Esquemas Raros</span>
               </label>
               <label className="flex items-center gap-3 cursor-pointer group">
                 <input className="rounded border-slate-700 bg-slate-800 text-primary focus:ring-primary" type="checkbox"/>
-                <span className="text-sm text-slate-400 group-hover:text-slate-100 transition-colors">Epic Artifacts</span>
+                <span className="text-sm text-slate-400 group-hover:text-slate-100 transition-colors">Artefatos Épicos</span>
               </label>
               <label className="flex items-center gap-3 cursor-pointer group">
                 <input defaultChecked className="rounded border-slate-700 bg-slate-800 text-primary focus:ring-primary" type="checkbox"/>
-                <span className="text-sm text-slate-400 group-hover:text-slate-100 transition-colors font-semibold">Legendary Relics</span>
+                <span className="text-sm text-slate-400 group-hover:text-slate-100 transition-colors font-semibold">Relíquias Lendárias</span>
               </label>
             </div>
           </div>
 
           <div className="p-4 rounded-xl bg-gradient-to-br from-primary/20 to-secondary/20 border border-primary/20">
-            <p className="text-sm font-bold text-primary mb-1">Trader's Tip</p>
-            <p className="text-xs text-slate-400 leading-relaxed italic">"The Phoenix Ember glows brighter when a true hero approaches the shop."</p>
+            <p className="text-sm font-bold text-primary mb-1">Dica do Mercador</p>
+            <p className="text-xs text-slate-400 leading-relaxed italic">"A Fênix de Brasa brilha mais forte quando um verdadeiro herói se aproxima da loja."</p>
           </div>
         </aside>
 
@@ -66,12 +66,12 @@ export default function Arsenal() {
         <section className="flex-1">
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 gap-4">
             <div>
-              <h2 className="text-3xl font-black tracking-tight text-white mb-1">PREMIUM GEAR</h2>
-              <p className="text-slate-400">Forged in the heart of the Eternal Mountain.</p>
+              <h2 className="text-3xl font-black tracking-tight text-white mb-1">ARMAMENTO DE ELITE</h2>
+              <p className="text-slate-400">Forjado no coração da Montanha Eterna.</p>
             </div>
             <div className="flex gap-2">
               <button className="flex items-center gap-2 px-4 py-2 bg-slate-800 hover:bg-slate-700 rounded-lg text-sm font-semibold transition-all">
-                <span className="material-symbols-outlined text-sm">sort</span> Relevance
+                <span className="material-symbols-outlined text-sm">sort</span> Relevância
               </button>
               <button className="p-2 bg-slate-800 hover:bg-slate-700 rounded-lg text-sm transition-all">
                 <span className="material-symbols-outlined">grid_view</span>
@@ -85,7 +85,7 @@ export default function Arsenal() {
               <ProductCard key={product.id} product={product} />
             ))}
             {products.length === 0 && (
-                <p className="text-slate-500 italic col-span-full">Nenhum item encontrado no Arsénal.</p>
+                <p className="text-slate-500 italic col-span-full">As prateleiras da armaria estão vazias.</p>
             )}
           </div>
         </section>
