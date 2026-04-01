@@ -22,14 +22,40 @@ class RegisterView(generics.CreateAPIView):
     permission_classes = (AllowAny,)
     serializer_class = UserSerializer
     
-@api_view(['GET'])
+@api_view(['GET', 'PUT'])
 @permission_classes([IsAuthenticated])
 def me(request):
     user = request.user
+    
+    # Garante que o perfil exista (para usuários criados antes da migration)
+    from .models import UserProfile
+    profile, created = UserProfile.objects.get_or_create(user=user)
+
+    if request.method == 'PUT':
+        data = request.data
+        profile.war_name = data.get('war_name', profile.war_name)
+        
+        age_val = data.get('age', profile.age)
+        if age_val == "" or age_val == "null":
+            profile.age = None
+        else:
+            try:
+                profile.age = int(age_val) if age_val is not None else None
+            except ValueError:
+                pass
+
+        profile.character_class = data.get('character_class', profile.character_class)
+        profile.description = data.get('description', profile.description)
+        profile.save()
+
     return Response({
         "id": user.id,
         "username": user.username,
         "email": user.email,
+        "war_name": profile.war_name,
+        "age": profile.age,
+        "character_class": profile.character_class,
+        "description": profile.description,
     })
     
 class OrderViewSet(viewsets.ModelViewSet):

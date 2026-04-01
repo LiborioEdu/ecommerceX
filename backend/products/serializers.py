@@ -32,9 +32,13 @@ class UserSerializer(serializers.ModelSerializer):
         return user
     
 class OrderItemSerializer(serializers.ModelSerializer):
+    product_name = serializers.ReadOnlyField(source='product.name')
+    product_image = serializers.ImageField(source='product.image', read_only=True, allow_null=True)
+    product_category = serializers.ReadOnlyField(source='product.category.name')
+
     class Meta:
         model = OrderItem
-        fields = ['product', 'quantity', 'price']
+        fields = ['product', 'product_name', 'product_image', 'product_category', 'quantity', 'price']
         read_only_fields = ['price']
 
 class OrderSerializer(serializers.ModelSerializer):

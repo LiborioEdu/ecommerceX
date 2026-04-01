@@ -23,17 +23,23 @@ export default function Arsenal() {
           <div>
             <h3 className="text-xs font-bold uppercase tracking-widest text-slate-500 mb-4">Categoria de Equipamento</h3>
             <div className="space-y-1">
-              <button className="w-full flex items-center gap-3 px-3 py-2 rounded-lg bg-primary/10 text-primary font-medium">
-                <span className="material-symbols-outlined">swords</span> Todos os Equipamentos
+              <button className="w-full flex items-center gap-3 px-3 py-2 rounded-lg bg-primary/10 text-primary font-medium cursor-pointer">
+                <span className="material-symbols-outlined">category</span> Todos os Equipamentos
               </button>
-              <button className="w-full flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-slate-800 text-slate-400 hover:text-slate-100 transition-all">
-                <span className="material-symbols-outlined">shield</span> Escudos & Armaduras pesadas
+              <button className="w-full flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-slate-800 text-slate-400 hover:text-slate-100 transition-all cursor-pointer">
+                <span className="material-symbols-outlined">shield</span> Armaduras
               </button>
-              <button className="w-full flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-slate-800 text-slate-400 hover:text-slate-100 transition-all">
-                <span className="material-symbols-outlined">magic_button</span> Vestes Arcanas
+              <button className="w-full flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-slate-800 text-slate-400 hover:text-slate-100 transition-all cursor-pointer">
+                <span className="material-symbols-outlined">science</span> Poções
               </button>
-              <button className="w-full flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-slate-800 text-slate-400 hover:text-slate-100 transition-all">
-                <span className="material-symbols-outlined">science</span> Elixires e Consumíveis
+              <button className="w-full flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-slate-800 text-slate-400 hover:text-slate-100 transition-all cursor-pointer">
+                <span className="material-symbols-outlined">auto_fix_high</span> Relíquias
+              </button>
+              <button className="w-full flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-slate-800 text-slate-400 hover:text-slate-100 transition-all cursor-pointer">
+                <span className="material-symbols-outlined">menu_book</span> Grimórios
+              </button>
+              <button className="w-full flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-slate-800 text-slate-400 hover:text-slate-100 transition-all cursor-pointer">
+                <span className="material-symbols-outlined">swords</span> Armas
               </button>
             </div>
           </div>
@@ -42,16 +48,24 @@ export default function Arsenal() {
             <h3 className="text-xs font-bold uppercase tracking-widest text-slate-500 mb-4">Raridade do Item</h3>
             <div className="space-y-2">
               <label className="flex items-center gap-3 cursor-pointer group">
-                <input className="rounded border-slate-700 bg-slate-800 text-primary focus:ring-primary" type="checkbox"/>
-                <span className="text-sm text-slate-400 group-hover:text-slate-100 transition-colors">Esquemas Raros</span>
+                <input className="rounded border-slate-700 bg-slate-800 text-primary focus:ring-primary cursor-pointer" type="checkbox"/>
+                <span className="text-sm text-slate-400 group-hover:text-slate-100 transition-colors">Comum</span>
               </label>
               <label className="flex items-center gap-3 cursor-pointer group">
-                <input className="rounded border-slate-700 bg-slate-800 text-primary focus:ring-primary" type="checkbox"/>
-                <span className="text-sm text-slate-400 group-hover:text-slate-100 transition-colors">Artefatos Épicos</span>
+                <input className="rounded border-slate-700 bg-slate-800 text-primary focus:ring-primary cursor-pointer" type="checkbox"/>
+                <span className="text-sm text-slate-400 group-hover:text-slate-100 transition-colors">Incomum</span>
               </label>
               <label className="flex items-center gap-3 cursor-pointer group">
-                <input defaultChecked className="rounded border-slate-700 bg-slate-800 text-primary focus:ring-primary" type="checkbox"/>
-                <span className="text-sm text-slate-400 group-hover:text-slate-100 transition-colors font-semibold">Relíquias Lendárias</span>
+                <input className="rounded border-slate-700 bg-slate-800 text-primary focus:ring-primary cursor-pointer" type="checkbox"/>
+                <span className="text-sm text-slate-400 group-hover:text-slate-100 transition-colors">Raro</span>
+              </label>
+              <label className="flex items-center gap-3 cursor-pointer group">
+                <input className="rounded border-slate-700 bg-slate-800 text-primary focus:ring-primary cursor-pointer" type="checkbox"/>
+                <span className="text-sm text-slate-400 group-hover:text-slate-100 transition-colors">Épico</span>
+              </label>
+              <label className="flex items-center gap-3 cursor-pointer group">
+                <input className="rounded border-slate-700 bg-slate-800 text-primary focus:ring-primary cursor-pointer" type="checkbox"/>
+                <span className="text-sm text-slate-400 group-hover:text-slate-100 transition-colors">Lendário</span>
               </label>
             </div>
           </div>
@@ -69,14 +83,7 @@ export default function Arsenal() {
               <h2 className="text-3xl font-black tracking-tight text-white mb-1">ARMAMENTO DE ELITE</h2>
               <p className="text-slate-400">Forjado no coração da Montanha Eterna.</p>
             </div>
-            <div className="flex gap-2">
-              <button className="flex items-center gap-2 px-4 py-2 bg-slate-800 hover:bg-slate-700 rounded-lg text-sm font-semibold transition-all">
-                <span className="material-symbols-outlined text-sm">sort</span> Relevância
-              </button>
-              <button className="p-2 bg-slate-800 hover:bg-slate-700 rounded-lg text-sm transition-all">
-                <span className="material-symbols-outlined">grid_view</span>
-              </button>
-            </div>
+
           </div>
 
           {/* Grid */}

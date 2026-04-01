@@ -15,7 +15,14 @@ function App() {
       <Route path="/" element={<Home />} />
       <Route path="/arsenal" element={<Arsenal />} />
       <Route path="/product/:id" element={<ProductDetail />} />
-      <Route path="/cart" element={<Cart />} />
+      <Route 
+        path="/cart" 
+        element={
+          <PrivateRoute>
+            <Cart />
+          </PrivateRoute>
+        } 
+      />
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
 

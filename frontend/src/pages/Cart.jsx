@@ -1,9 +1,10 @@
 import { useCart } from "../context/CartContext";
 import Navbar from "../components/Navbar";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function Cart() {
   const { cart, removeFromCart, updateQuantity } = useCart();
+  const navigate = useNavigate();
 
   const total = cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
 
@@ -47,15 +48,15 @@ export default function Cart() {
                               {item.category_name || "Item Mítico"}
                             </p>
                           </div>
-                          <p className="font-bold text-primary">{Number(item.price).toFixed(0)} PO</p>
+                          <p className="font-bold text-primary">{Number(item.price).toFixed(0)} Coin</p>
                         </div>
                         <div className="flex items-center justify-between mt-4">
                           <div className="flex items-center bg-slate-100 dark:bg-background-dark rounded-lg px-2 border border-slate-300 dark:border-slate-700">
-                            <button onClick={() => updateQuantity(item.id, -1)} className="p-1 hover:text-primary"><span className="material-symbols-outlined text-sm">remove</span></button>
+                            <button onClick={() => updateQuantity(item.id, -1)} className="p-1 hover:text-primary cursor-pointer"><span className="material-symbols-outlined text-sm">remove</span></button>
                             <span className="px-4 text-sm font-bold">{item.quantity}</span>
-                            <button onClick={() => updateQuantity(item.id, 1)} className="p-1 hover:text-primary"><span className="material-symbols-outlined text-sm">add</span></button>
+                            <button onClick={() => updateQuantity(item.id, 1)} className="p-1 hover:text-primary cursor-pointer"><span className="material-symbols-outlined text-sm">add</span></button>
                           </div>
-                          <button onClick={() => removeFromCart(item.id)} className="text-slate-400 hover:text-red-500 transition-colors">
+                          <button onClick={() => removeFromCart(item.id)} className="text-slate-400 hover:text-red-500 transition-colors cursor-pointer">
                             <span className="material-symbols-outlined">delete</span>
                           </button>
                         </div>
@@ -65,41 +66,7 @@ export default function Cart() {
                 </div>
             )}
             
-            {/* Shipping Form */}
-            {cart.length > 0 && (
-                <div className="bg-white dark:bg-card-dark rounded-xl p-6 border border-slate-200 dark:border-slate-800">
-                  <div className="flex items-center gap-2 mb-6">
-                    <span className="material-symbols-outlined text-primary">map</span>
-                    <h2 className="text-xl font-bold">Entrega para o Reino</h2>
-                  </div>
-                  <form className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div className="space-y-1">
-                      <label className="text-xs uppercase tracking-wider font-bold text-slate-500">Nome do Lorde/Lady</label>
-                      <input className="w-full bg-slate-50 dark:bg-background-dark border-slate-200 dark:border-slate-700 rounded-lg focus:ring-primary focus:border-primary" placeholder="Sir Alistair de Oakhaven" type="text" />
-                    </div>
-                    <div className="space-y-1">
-                      <label className="text-xs uppercase tracking-wider font-bold text-slate-500">Domínio / Reino</label>
-                      <input className="w-full bg-slate-50 dark:bg-background-dark border-slate-200 dark:border-slate-700 rounded-lg focus:ring-primary focus:border-primary" placeholder="As Terras de Ferro" type="text" />
-                    </div>
-                    <div className="md:col-span-2 space-y-1">
-                      <label className="text-xs uppercase tracking-wider font-bold text-slate-500">Endereço da Fortaleza</label>
-                      <input className="w-full bg-slate-50 dark:bg-background-dark border-slate-200 dark:border-slate-700 rounded-lg focus:ring-primary focus:border-primary" placeholder="Sala do Trono, 3º Andar da Cidadela" type="text" />
-                    </div>
-                    <div className="space-y-1">
-                      <label className="text-xs uppercase tracking-wider font-bold text-slate-500">Corvo Mensageiro (Transporte)</label>
-                      <select className="w-full bg-slate-50 dark:bg-background-dark border-slate-200 dark:border-slate-700 rounded-lg focus:ring-primary focus:border-primary">
-                        <option>Corvo Comum (5-7 Ciclos Lunares)</option>
-                        <option>Grifo Real (Na Manhã Seguinte)</option>
-                        <option>Círculo de Teletransporte (Imediato)</option>
-                      </select>
-                    </div>
-                    <div className="space-y-1">
-                      <label className="text-xs uppercase tracking-wider font-bold text-slate-500">Pergaminho de Instruções</label>
-                      <input className="w-full bg-slate-50 dark:bg-background-dark border-slate-200 dark:border-slate-700 rounded-lg focus:ring-primary focus:border-primary" placeholder="Ordens adicionais de entrega" type="text" />
-                    </div>
-                  </form>
-                </div>
-            )}
+
           </div>
           
           {/* Right Column: Summary */}
@@ -120,17 +87,15 @@ export default function Cart() {
                   <div className="space-y-3">
                     <div className="flex justify-between text-slate-400">
                       <span>Valor Base do Saque</span>
-                      <span>{total.toFixed(2)} PO</span>
+                      <span>{total.toFixed(2)} Coin</span>
                     </div>
-                    <div className="flex justify-between text-slate-400">
-                      <span>Seguro da Caravana</span>
-                      <span>0.00 PO</span>
+                    <div className="flex justify-between items-center text-slate-400 mb-6">
+                      <span>Impostos da Coroa</span>
+                      <span>0.00 Coin</span>
                     </div>
-                    <div className="pt-4 border-t border-primary/10 flex justify-between items-end">
-                      <div>
-                        <p className="text-xs uppercase tracking-wider text-slate-500">Contribuição Total</p>
-                        <p className="text-3xl font-black text-white">{total.toFixed(2)} <span className="text-primary text-lg">PO</span></p>
-                      </div>
+                    <div className="flex justify-between items-center bg-slate-800/50 p-4 rounded-xl mb-6">
+                      <span className="font-bold uppercase tracking-widest text-sm">Valor Total</span>
+                        <p className="text-3xl font-black text-white">{total.toFixed(2)} <span className="text-primary text-lg">Coin</span></p>
                     </div>
                   </div>
                   
@@ -144,9 +109,9 @@ export default function Cart() {
                     </div>
                   </div>
                   
-                  <button className="w-full bg-primary hover:bg-primary/90 text-background-dark font-bold py-4 rounded-xl flex items-center justify-center gap-2 transition-all transform hover:scale-[1.02] active:scale-95 shadow-lg shadow-primary/20">
+                  <button onClick={() => navigate('/checkout')} className="w-full bg-primary hover:bg-primary/90 text-background-dark font-bold py-4 rounded-xl flex items-center justify-center gap-2 transition-all transform hover:scale-[1.02] active:scale-95 shadow-lg shadow-primary/20 cursor-pointer">
                     <span className="material-symbols-outlined">payments</span>
-                    Finalizar o Intercâmbio
+                    Finalizar a Compra
                   </button>
                   
                   <div className="flex justify-center gap-4 grayscale opacity-50">
